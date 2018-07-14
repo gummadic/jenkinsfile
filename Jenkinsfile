@@ -1,18 +1,22 @@
 pipeline {
-  agent {
-    node {
-      label 'test'
-    }
-
-  }
+  agent any
   stages {
     stage('Example Build') {
-      agent {
-        docker 'maven:3-alpine'
-      }
-      steps {
-        echo 'Hello, Maven'
-        sh 'mvn --version'
+      parallel {
+        stage('Example Build') {
+          agent {
+            docker 'maven:3-alpine'
+          }
+          steps {
+            echo 'Hello, Maven'
+            sh 'mvn --version'
+          }
+        }
+        stage('test') {
+          steps {
+            sh 'echo "hi"'
+          }
+        }
       }
     }
     stage('Example Test') {
