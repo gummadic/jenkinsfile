@@ -20,12 +20,21 @@ pipeline {
       }
     }
     stage('Example Test') {
-      agent {
-        docker 'openjdk:8-jre'
-      }
-      steps {
-        echo 'Hello, JDK'
-        sh 'java -version'
+      parallel {
+        stage('Example Test') {
+          agent {
+            docker 'openjdk:8-jre'
+          }
+          steps {
+            echo 'Hello, JDK'
+            sh 'java -version'
+          }
+        }
+        stage('') {
+          steps {
+            bat 'test'
+          }
+        }
       }
     }
   }
