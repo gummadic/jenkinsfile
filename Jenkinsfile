@@ -30,7 +30,7 @@ pipeline {
             sh 'java -version'
           }
         }
-        stage('') {
+        stage('error') {
           steps {
             bat 'test'
           }
