@@ -37,5 +37,10 @@ pipeline {
         }
       }
     }
+    stage('Deploy') {
+      steps {
+        bat 'test'
+      }
+    }
   }
 }
